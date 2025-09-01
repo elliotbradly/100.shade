@@ -57,6 +57,12 @@ export const TEST_SHADE = "[Test action] Test Shade";
  constructor(public bale: ShadeBit) {}
  }
  
+export const BUILD_SHADE = "[Build action] Build Shade";
+ export class BuildShade implements Action {
+ readonly type = BUILD_SHADE;
+ constructor(public bale: ShadeBit) {}
+ }
+ 
 export type Actions = | InitShade | UpdateShade 
 | OpenShade
 | BodyShade
@@ -65,3 +71,4 @@ export type Actions = | InitShade | UpdateShade
 | EditShade
 | PatchShade
 | TestShade
+| BuildShade

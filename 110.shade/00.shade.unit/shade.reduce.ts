@@ -34,6 +34,9 @@ case Act.PATCH_SHADE:
 case Act.TEST_SHADE:
  return Buzz.testShade(clone(model), act.bale, state);
  
+case Act.BUILD_SHADE:
+ return Buzz.buildShade(clone(model), act.bale, state);
+ 
  default:
  return model;
  }

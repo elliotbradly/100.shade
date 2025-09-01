@@ -25,8 +25,6 @@ import ShadeBit from "../fce/shade.bit";
 import State from "../../99.core/state";
 import * as doT from "dot";
 
-
-
 var bit, val, idx, dex, lst, dat, src;
 
 var once = false
@@ -241,6 +239,12 @@ export const testShade = async (cpy: ShadeModel, bal: ShadeBit, ste: State) => {
     if (bal.slv != null) bal.slv({ shdBit: { idx: "test-shade", dat: {} } });
 
 
+    return cpy;
+};
+
+export const buildShade = (cpy: ShadeModel, bal: ShadeBit, ste: State) => {
+
+    bal.slv({ shdBit: { idx: "build-shade", dat: {} } });
     return cpy;
 };
 

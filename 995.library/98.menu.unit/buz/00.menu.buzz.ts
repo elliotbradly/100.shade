@@ -4,6 +4,7 @@ import * as ActLib from "../../00.library.unit/library.action";
 import * as ActUnt from "../../01.unit.unit/unit.action";
 import * as ActAct from "../../02.action.unit/action.action";
 
+import * as ActSde from "../../act/shade.action";
 
 import * as ActClc from "../../97.collect.unit/collect.action";
 
@@ -67,6 +68,8 @@ export const initMenu = async (cpy: MenuModel, bal: MenuBit, ste: State) => {
 export const updateMenu = async (cpy: MenuModel, bal: MenuBit, ste: State) => {
 
   lst = [
+    ActSde.BUILD_SHADE,
+    ActLib.COUNT_LIBRARY,
     ActLib.COUNT_LIBRARY,
     ActUnt.UPDATE_UNIT,
     ActAct.UPDATE_ACTION,
@@ -74,7 +77,7 @@ export const updateMenu = async (cpy: MenuModel, bal: MenuBit, ste: State) => {
     ActLib.UPDATE_LIBRARY,
     ActLib.LIST_LIBRARY,
     ActLib.COUNT_LIBRARY,
-    
+
   ]
 
   bit = await ste.hunt(ActGrd.UPDATE_GRID, { x: 0, y: 4, xSpan: 4, ySpan: 12 })
@@ -83,7 +86,18 @@ export const updateMenu = async (cpy: MenuModel, bal: MenuBit, ste: State) => {
   src = bit.chcBit.src;
 
   switch (src) {
-   
+
+    case ActSde.BUILD_SHADE:
+      //var bit = await ste.hunt( ActSde.BUILD_SHADE, {})
+
+      debugger
+
+
+
+      bit = await ste.hunt(ActMnu.PRINT_MENU, bit)
+      break;
+
+
     case ActMnu.DIFFUSION_MENU:
       var bit = await ste.hunt(ActMnu.DIFFUSION_MENU, {})
       bit = await ste.hunt(ActMnu.PRINT_MENU, bit)
