@@ -33,6 +33,7 @@ import * as FOCUS from "../../val/focus";
 var bit, lst, dex, idx, dat, src, val;
 
 var FS = require('fs-extra')
+var S = require('string')
 const path = require('path');
 var exec = require('child_process').exec;
 
@@ -88,10 +89,32 @@ export const updateMenu = async (cpy: MenuModel, bal: MenuBit, ste: State) => {
   switch (src) {
 
     case ActSde.BUILD_SHADE:
-      //var bit = await ste.hunt( ActSde.BUILD_SHADE, {})
 
-      debugger
+      //var bit = await ste.hunt(ActSde.BUILD_SHADE, {})
 
+      exec("tsc -b 110.shade", async (err, stdout, stderr) => {
+
+        if (err) {
+          console.error(`exec error: ${err}`);
+        }
+
+        var template = 'node ./data/hand/000.eveiefy -t ' + bal.src;
+        exec(template, async (err, stdout, stderr) => {
+          if (err) {
+            console.error(`exec error: ${err}`);
+          }
+
+        
+
+          //var item = FS.readFileSync("./work/002.space.js").toString()
+
+          //var replace = '_globals = (function(){ return this || (0,eval)("this"); }());'
+          //item = S(item).replaceAll(replace, '').s
+
+          bit = await ste.hunt(ActCns.UPDATE_CONSOLE, { idx: 'cns00', src: "--SHADE BUILT" })
+        });
+
+      });
 
 
       bit = await ste.hunt(ActMnu.PRINT_MENU, bit)
@@ -180,11 +203,6 @@ export const updateMenu = async (cpy: MenuModel, bal: MenuBit, ste: State) => {
       bit = await ste.hunt(ActMnu.PRINT_MENU, updateBit)
       break;
 
-    case ActLib.ASTRO_LIBRARY:
-      var bit = await ste.hunt(ActLib.ASTRO_LIBRARY, {})
-      bit = await ste.hunt(ActMnu.PRINT_MENU, bit)
-      break;
-
     case ActLib.LIST_LIBRARY:
       var bit = await ste.hunt(ActLib.LIST_LIBRARY, {})
       bit = await ste.hunt(ActMnu.PRINT_MENU, bit)
@@ -213,45 +231,6 @@ export const updateMenu = async (cpy: MenuModel, bal: MenuBit, ste: State) => {
       bit = await ste.hunt(ActMnu.PRINT_MENU, bit)
       break;
 
-    case ActMnu.CONTROL_MENU:
-      bit = await ste.hunt(ActMnu.CONTROL_MENU, {})
-      break;
-
-    case ActMnu.OLLAMA_MENU:
-      bit = await ste.hunt(ActMnu.OLLAMA_MENU, {})
-      break;
-
-    case ActMnu.SOWER_MENU:
-      bit = await ste.hunt(ActMnu.SOWER_MENU, {})
-      break;
-
-    case ActMnu.SPACE_MENU:
-      bit = await ste.hunt(ActMnu.SPACE_MENU, {})
-      break;
-
-    case ActMnu.TIME_MENU:
-      bit = await ste.hunt(ActMnu.TIME_MENU, {})
-      break;
-
-    case ActMnu.EARTH_MENU:
-      bit = await ste.hunt(ActMnu.EARTH_MENU, {})
-      break;
-
-    case ActMnu.MARKET_MENU:
-      bit = await ste.hunt(ActMnu.MARKET_MENU, {})
-      break;
-
-    case ActLib.UPDATE_LIBRARY:
-      ste.hunt(ActCns.UPDATE_CONSOLE, { idx: 'cns00', src: "Update Library Pivot" })
-      bit = await ste.hunt(ActLib.UPDATE_LIBRARY, {})
-      bit = await ste.hunt(ActMnu.PRINT_MENU, bit)
-      break;
-
-    case ActMnu.GITHUB_MENU:
-      bit = await ste.hunt(ActMnu.GITHUB_MENU, {})
-      bit = await ste.hunt(ActMnu.PRINT_MENU, bit)
-      bit = await ste.hunt(ActMnu.UPDATE_MENU)
-      break;
 
     default:
       bit = await ste.hunt(ActTrm.CLOSE_TERMINAL, {})
